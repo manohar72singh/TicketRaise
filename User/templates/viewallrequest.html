@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block title %}New Request{% endblock %}
+{%block content%}
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered table-hover table-responsive text-center" style="color:red">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email Id</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for n in nr %}
+            <tr>
+                <td>{{ n.id}}</td>
+                <td>{{ n.fname|upper}}{{n.lname|upper}}</td>
+                <td>{{ n.email|upper}}</td>
+                <td>
+                    <a href="/approveduser/{{n.id}}/{{uid}}" class="btn btn-warning btn-sm">Approve</a>
+                    <a href="/rejectuser/{{n.id}}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

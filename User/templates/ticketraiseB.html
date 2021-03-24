@@ -1,0 +1,72 @@
+{% extends 'business.html'%}
+{% block title %}Ticket Raise{% endblock %}
+
+{%block content%}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="alert alert-{{msgtype}} mt-3" role="alert">
+            <center>{{msg}}</center>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="text-center alert alert-primary">Ticket Raise</h2>
+            </div>
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <center><i><h4> Category </h4></i></center>
+                                <select name="cat" class="form-control">
+                                   {% for c in cat %}
+                                    <option value="{{c.id}}">{{c.category}}</option>
+                                   {% endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <center><i><h4> Ticket Type </h4></i></center>
+                                <select name="tctype" class="form-control">
+                                   {% for t in tc %}
+                                   <option value="{{t.id}}">{{t.tctype}}</option>
+                                   {% endfor%}
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <center><i><h4> Question </h4></i></center>
+                                <input type="text" name="que" class="form-control" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <center><i><h4>Description </h4></i></center>
+                                <textarea class="form-control" type="text" name="desc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center bg-warning">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">RESET</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

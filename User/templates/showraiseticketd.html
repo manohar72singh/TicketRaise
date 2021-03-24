@@ -1,0 +1,79 @@
+{% extends 'devloper.html'%}
+{% block title %}All Tickets {% endblock %}
+	<style type="text/css">
+		.svg-icon {
+  width: 40px;
+  height: 40px;
+}
+	</style>
+{% block content%}
+{% for t in ticket%}
+<div class="container">
+	<div class="row p-2 shadow mt-3">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <small>#{{t.id}}</small>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary btn-sm">New </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <strong>{{t.question |upper}} </strong><label class="text text-muted"> (2)</label> <sub class="text text-muted">{{t.trd}}</sub><br/>
+                    <small class="text text-muted">{{t.desc}}</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <svg class="svg-icon w-25" viewBox="0 0 20 20">
+                        <path d="M17.592,8.936l-6.531-6.534c-0.593-0.631-0.751-0.245-0.751,0.056l0.002,2.999L5.427,9.075H2.491c-0.839,0-0.162,0.901-0.311,0.752l3.683,3.678l-3.081,3.108c-0.17,0.171-0.17,0.449,0,0.62c0.169,0.17,0.448,0.17,0.618,0l3.098-3.093l3.675,3.685c-0.099-0.099,0.773,0.474,0.773-0.296v-2.965l3.601-4.872l2.734-0.005C17.73,9.688,18.326,9.669,17.592,8.936 M3.534,9.904h1.906l4.659,4.66v1.906L3.534,9.904z M10.522,13.717L6.287,9.48l4.325-3.124l3.088,3.124L10.522,13.717z M14.335,8.845l-3.177-3.177V3.762l5.083,5.083H14.335z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                    </svg>
+                </div>
+                <div class="col-md-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                    <small class="text text-muted">Raised By</small>
+                    <p>{{t.user.fname|upper}}</p>
+                </div>
+                <!--<div class="col-md-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                    <small class="text text-muted">Raised By</small>
+                    <p>Deepu</p>
+                </div>-->
+                <div class="col-md-2">
+                    <small class="text text-muted">Ticket Type</small>
+                    <p>{{t.ticket_type}}</p>
+                </div>
+                <div class="col-md-2">
+                    <small class="text text-muted">Categories</small>
+                    <p>{{t.category}}</p>
+                </div>
+                <!--<div class="col-md-2">
+                    <small class="text text-muted">Due </small>
+                    <p>in 1 day</p>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{%endblock%}

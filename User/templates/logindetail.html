@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block title %}logindetails{% endblock %}
+{%block content%}
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered table-hover table-responsive text-center" style="color:red">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Email Id</th>
+                    <th>Type</th>
+                    <th>Login dateTime</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for n in u %}
+            <tr>
+                <td>{{n.id}}</td>
+                <!--<td>{{ n.users.id}}</td>-->
+                <td>{{ n.users.fname|upper}} {{n.users.lname|upper}}</td>
+                <td>{{ n.users.email|upper}}</td>
+                <td>{{n.users.utype}}</td>
+                <td>{{n.logindt}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

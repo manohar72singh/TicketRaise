@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% block title %}Home{% endblock %}
+{% block content%}
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered table-hover table-responsive text-center" style="color:red">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Approved By</th>
+                <th>ApprovelDate</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in users%}
+            <tr>
+                <td>{{u.id}}</td>
+                <td>{{u.fname|upper}}{{u.lname|upper}}</td>
+                <td>{{u.gen}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.utype}}</td>
+                <td>{{u.approvedby}}</td>
+                <td>{{u.approveldt}}</td>
+            </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock%}

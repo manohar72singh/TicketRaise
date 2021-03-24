@@ -1,0 +1,61 @@
+{% extends 'devloper.html'%}
+{% block title %} Profile {% endblock %}
+{% block content%}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-3">
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label></label>
+                            <input type="text"  value="{{pro.fname|upper}} {{pro.lname|upper}}" readonly class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label></label>
+                           <input type="text"  value="{{pro.email|upper}} " readonly class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label></label>
+                           <input type="text"  value="{{pro.gen}} " readonly class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label></label>
+                           <input type="text"  value="{{pro.utype}} " readonly class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label></label>
+                        <input type=""  value=" {{pro.approvedby}}" readonly class="form-control">
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                        <label></label>
+                        <input type=""  value=" {{pro.approveddt}}" readonly class="form-control">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

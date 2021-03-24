@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email verify</title>
+    <link rel="stylesheet" href="{% static 'User/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'User/css/bootstrap.css' %}">
+    <script src="{% static 'User/js/bootstrap.js' %}"></script>
+    <script src="{% static 'User/js/jquery.js' %}"></script>
+    <script src="{% static 'User/js/popper.min.js' %}"></script>
+    <script type="text/javascript">
+        #("#em").change(function(){
+            var email = $(this).val();
+
+            $.ajax({
+                url : '/check_email/',
+                data :{
+                    'email' : email
+                },
+                dataType : 'json',
+                success : function(data)
+                {
+                    if (data.is_taken)
+                    {
+                        document.getElementById("error").innarHTML = 'User Already Exist'
+                        $("#em").val('');
+                    }
+                    else
+                    {
+                        document.getElementById("error").innarHTML='false';
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="alert alert-{{msgtype}} mt-3" role="alert">
+                <center>{{msg}}</center>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <center><i><h4> Email Id </h4></i></center>
+                        <h3 id="error"></h3>
+                        <input type="email"name="email" id="em" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                    <div class=" card-footer text-center bg-warning">
+                        <button type="submit" class="btn btn-success">Send Otp</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

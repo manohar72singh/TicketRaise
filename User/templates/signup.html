@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'User/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'User/css/bootstrap.css' %}">
+    <script src="{% static 'User/js/bootstrap.js' %}"></script>
+    <script type="text/javascript">
+            function validateForm()
+    {
+    var pwd =document.getElementById("pwd");
+    var cpwd = document.getElementById("cpwd");
+    var pwdd = pwd.value;
+    var cpwdd = cpwd.value;
+    if (pwdd == cpwdd)
+    {
+    return true;
+    }
+    else
+    {
+        alert("password must be same!");
+        pwd.value= "";
+        cpwd.value = "";
+        return false;
+    }
+
+    }
+    </script>
+</head>
+<body class="bg-info">
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h2 class="text-center alert alert-{{msgtype}}">{{ msg}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2 class="text-center alert alert-primary">User Registration</h2>
+                </div>
+                <form action="" method="post" onsubmit="return validateForm();">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4> First Name </h4></i></center>
+                                    <input type="text" name="ufname" placeholder="First Name" value="{{ufname}}" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4> Last Name </h4></i></center>
+                                    <input type="text" name="ulname" placeholder="Last Name" value="{{ulname}}" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4> UserType </h4></i></center>
+                                    <select name="utype" class="form-control">
+                                        {% for u in utype%}
+                                        <option value="{{u.id}}">{{u.type}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4> Gender </h4></i></center>
+                                    <select name="gen" class="form-control">
+                                        <option value="male" selected> Male</option>
+                                        <option value="female"> Female</option>
+                                        <option value="other"> Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4>Email Id </h4></i></center>
+                                    <input type="email" name="email"  value="{{email}}" readonly placeholder="Email" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4>Password </h4></i></center>
+                                    <input type="password" name="pwd" id="pwd" placeholder="Password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <center><i><h4>Confirm Password </h4></i></center>
+                                    <input type="password" name="cpwd" id="cpwd" placeholder="Re-Password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center bg-warning">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">RESET</button>
+                        <p class="text-center">Already have an account? <a href="/login/">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
