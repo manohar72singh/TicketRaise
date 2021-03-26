@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 urlpatterns = [
+    path('',views.home),
     path('index/',views.index),
     path('signup/',views.signup),
     path('login/',views.login),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('ticketraiseB/',views.ticketraiseB),
     path('showraiseticket/',views.showraiseticket),
     path('showraiseticketd/',views.showraiseticketD),
+    path('statuschanged/<int:id>/<int:uid>',views.statuschange),
+    path('statuschangeadmin/<int:id>/<int:uid>',views.statuschangeadmin),
 ]

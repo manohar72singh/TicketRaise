@@ -53,4 +53,4 @@ class Ticket(models.Model):
     tcd = models.DateTimeField(null=True)
 
     def __str__(self):
-        return f'{self.user}--{self.status}--{self.category}--{self.ticket_type}-{self.question}--{self.desc}--{self.trd}'
+        return f'{self.id}--{self.user}--{self.status}--{self.category}--{self.ticket_type}-{self.question}--{self.desc}--{self.trd}'

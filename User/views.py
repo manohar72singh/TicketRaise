@@ -5,6 +5,20 @@ import random
 from django.core.mail import send_mail
 from django.http import JsonResponse
 # Create your views here.
+def home(request):
+    uid = request.session.get('uid', 'none')
+    if uid == 'none':
+        # user is not login redirect to login page
+        return redirect('/login/')
+    ut = request.session.get('ut')
+    if ut == 'Admin':
+        return redirect('/index/')
+    elif ut == 'Devloper':
+        return redirect('/devloper/')
+    else:
+        return redirect('/business/')
+
+    return render(request,'home.html')
 def index(request):
     uid = request.session.get('uid', 'none')
     if uid == 'none':
@@ -18,7 +32,8 @@ def index(request):
     tnr = len(newrequest)
     newtr = Ticket.objects.filter(status=None)
     ntr = len(newtr)
-    return render(request,'index.html',{'un':un,'tr':tnr,'ut':ut,'uid':uid,'ntr':ntr})
+    opentc=Ticket.objects.filter(status__isnull=False)
+    return render(request,'index.html',{'un':un,'tr':tnr,'ut':ut,'uid':uid,'ntr':ntr,'otc':opentc})
 
 def signup(request):
     msg = ''
@@ -77,10 +92,10 @@ def logout(request):
     try:
         del request.session['uid']
         # redirect to login page
-        return redirect('/login/')
+        return redirect('/')
     except:
         # redirect to login page
-        return redirect('/login/')
+        return redirect('/')
 
 
 def viewallrequest(request):
@@ -141,6 +156,7 @@ def approvel_request(request,id,uid):
     pwd=apr.pwd
     send_Mail(email, pwd)
     return redirect('/viewallrequest/')
+
 
 
 def rejectuser(request,id):
@@ -287,6 +303,7 @@ def devloper_home(request):
     tnr = len(newrequest)
     newtr = Ticket.objects.filter(status=None)
     ntr = len(newtr)
+
     return render(request,'devloper.html',{'un':un,'ut':ut,'uid':uid,'tr':tnr,'ntr':ntr})
 
 def business_home(request):
@@ -363,12 +380,13 @@ def showraiseticket(request):
         # user is not login redirect to login page
         return redirect('/login/')
     un = request.session.get('un')
-    ticket=Ticket.objects.all()
+    uid = request.session.get('uid')
+    ticket=Ticket.objects.filter(status=None)
     newrequest = User.objects.filter(approvedby=None)
     tnr = len(newrequest)
     newtr=Ticket.objects.filter(status=None)
     ntr=len(newtr)
-    return render(request,'show Raise Ticket.html',{'ticket':ticket,'tr':tnr,'ntr':ntr,'un':un})
+    return render(request,'show Raise Ticket.html',{'ticket':ticket,'tr':tnr,'ntr':ntr,'un':un,'uid':uid})
 
 def showraiseticketD(request):
     uid = request.session.get('uid', 'none')
@@ -376,9 +394,38 @@ def showraiseticketD(request):
         # user is not login redirect to login page
         return redirect('/login/')
     un = request.session.get('un')
-    ticket=Ticket.objects.all()
+    uid=request.session.get('uid')
+    ticket=Ticket.objects.filter(status=None)
     newrequest = User.objects.filter(approvedby=None)
     tnr = len(newrequest)
     newtr=Ticket.objects.filter(status=None)
     ntr=len(newtr)
-    return render(request,'showraiseticketd.html',{'ticket':ticket,'tr':tnr,'ntr':ntr,'un':un})
+    return render(request,'showraiseticketd.html',{'ticket':ticket,'tr':tnr,'ntr':ntr,'un':un,'uid':uid})
+
+
+def statuschange(request,id,uid):
+    uid = request.session.get('uid', 'none')
+    if uid == 'none':
+        # user is not login redirect to login page
+        return redirect('/login/')
+    un=request.session.get('un')
+    cdttm = datetime.datetime.now()
+    cs=Ticket.objects.get(id=id)
+    cs.status=un
+    cs.tod=cdttm
+    cs.save()
+    return redirect('/showraiseticketd/')
+
+
+def statuschangeadmin(request,id,uid):
+    uid = request.session.get('uid', 'none')
+    if uid == 'none':
+        # user is not login redirect to login page
+        return redirect('/login/')
+    un=request.session.get('un')
+    cdttm = datetime.datetime.now()
+    cs=Ticket.objects.get(id=id)
+    cs.status=un
+    cs.tod=cdttm
+    cs.save()
+    return redirect('/index/')
